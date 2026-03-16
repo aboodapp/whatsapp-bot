@@ -26,10 +26,10 @@ async function startBot() {
       const { connection, lastDisconnect, qr } = update;
 
       if (qr) {
-         console.log('\n📱 QR Code جديد! افتح هذا الرابط لعرض الكود وصوره بالجوال:\n');
-         const qrUrl = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(qr)}`;
+         console.log('\n📱 QR Code جديد! افتح هذا الرابط في المتصفح لعرض الصورة الكاملة وصورها من واتساب:\n');
+         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(qr)}&size=300x300`;
          console.log(qrUrl);
-         console.log('\n(انسخ الرابط وافتحه في المتصفح، ثم صور الكود من واتساب)\n');
+         console.log('\n(انسخ الرابط وافتحه، ثم ربط الجهاز بسرعة قبل ما ينتهي الـ QR!)\n');
       }
 
       if (connection === 'close') {
