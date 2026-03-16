@@ -5,7 +5,6 @@ const {
    fetchLatestBaileysVersion
 } = require('@whiskeysockets/baileys');
 const pino = require('pino');
-const qrcode = require('qrcode-terminal');
 
 let isActive = false;  // حالة البوت: false = موقوف، true = نشيط
 let lastNumber = null;  // لتتبع الرقم الأخير عشان نمنع اللوب
@@ -27,9 +26,10 @@ async function startBot() {
       const { connection, lastDisconnect, qr } = update;
 
       if (qr) {
-         console.log('\n📱 QR Code جديد! افتح واتساب → ربط جهاز → صوّر هذا الكود:\n');
-         qrcode.generate(qr, { small: true });
-         console.log('\n(إذا ما طلع الكود واضح، أعد تشغيل البوت مرة ثانية)\n');
+         console.log('\n📱 QR Code جديد! افتح هذا الرابط لعرض الكود وصوره بالجوال:\n');
+         const qrUrl = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(qr)}`;
+         console.log(qrUrl);
+         console.log('\n(انسخ الرابط وافتحه في المتصفح، ثم صور الكود من واتساب)\n');
       }
 
       if (connection === 'close') {
